@@ -1,0 +1,17 @@
+table {
+    border-radius: 8px;
+    overflow: hidden;
+    text-align-last: center;
+    background-color: #f5f4f4;
+    box-shadow: 2px 2px 2px 1px #00000033;
+}
+
+thead {
+    height: 3rem;
+    background-color: #e4ad2d;
+    border: 1rem;
+}
+
+tr:hover {
+    background-color: #e4ad2d48;
+}
