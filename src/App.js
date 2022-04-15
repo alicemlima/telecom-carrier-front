@@ -32,19 +32,13 @@ function App() {
     )
   }
 
-  const items = data?.map((number) =>
-    <li key={number.id}>
-      {number.value}
-      +
-      {number.id}
-    </li>
-  );
+
 
   return (
     <div>
       <HeaderBar />
       <Container>
-        <DataTable />
+        <DataTable info={data} />
       </Container>
     </div>
   );

@@ -10,22 +10,19 @@ export default class index extends Component {
             <th>ID</th>
             <th>Number</th>
             <th>Monthy Price</th>
-            <th>Setup Price</th>
+            <th>Monthy Setup Price</th>
             <th>Status</th>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              {Array.from({ length: 4 }).map((_, index) => (
-              <td key={index}>Table cell {index}</td>
+            {(this.props.info).map(values => (
+              <tr>
+              <td>{values.id}</td>
+              <td>{values.value}</td>
+              <td>{values.currency} {values.monthyPrice}</td>
+              <td>{values.currency} {values.monthySetupPrice}</td>
+              <td>available</td>
+              </tr>
             ))}
-            </tr>
-            <tr>
-              <td>2</td>
-              {Array.from({ length: 4 }).map((_, index) => (
-              <td key={index}>Table cell {index}</td>
-            ))}
-            </tr>
           </tbody>
       </Table>
     )
