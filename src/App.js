@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HeaderBar from './components/HeaderBar';
 import DataTable from './components/DataTable';
+import PaginationTable from './components/PaginationTable';
 import { Container, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { retrieveData } from './ducks/dataSlice';
@@ -15,14 +16,16 @@ function App() {
   } = useSelector(state => state.data);
 
   React.useEffect(() => {
-    dispatch(retrieveData())
+    dispatch(retrieveData());
   }, [dispatch]);
-
+  
   if (isLoading) {
     return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <Container>
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </Container>
     )
   }
 
@@ -32,13 +35,21 @@ function App() {
     )
   }
 
+  //Paginations consts and States
+  // const [rows, setRows] = React.useState(data);
+  // const [currentPage, setCurrentPage] = React.useState(1);
+  // const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  // const indexOfLastRow = currentPage * rowsPerPage;
+  // const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  // const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
 
   return (
     <div>
       <HeaderBar />
       <Container>
-        <DataTable info={data} />
+        {/* <DataTable info={currentRows} />
+        <PaginationTable rowsPerPage={rowsPerPage} totalRows={rows.length}/> */}
       </Container>
     </div>
   );

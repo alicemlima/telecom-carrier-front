@@ -16,11 +16,10 @@ export default class index extends Component {
           <tbody>
             {(this.props.info).map(values => (
               <tr>
-              <td>{values.id}</td>
-              <td>{values.value}</td>
-              <td>{values.currency} {values.monthyPrice}</td>
-              <td>{values.currency} {values.monthySetupPrice}</td>
-              <td>available</td>
+                <td>{values.id}</td>
+                <td>{values.value}</td>
+                <td>{values.currency} {values.monthyPrice}</td>
+                <td>{values.currency} {values.monthySetupPrice}</td>
               </tr>
             ))}
           </tbody>
