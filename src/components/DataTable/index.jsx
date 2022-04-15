@@ -11,7 +11,6 @@ export default class index extends Component {
             <th>Number</th>
             <th>Monthy Price</th>
             <th>Monthy Setup Price</th>
-            <th>Status</th>
           </thead>
           <tbody>
             {(this.props.info).map(values => (
