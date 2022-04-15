@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Pagination } from 'react-bootstrap'
 
-const PaginationTable = ({ rowsPerPage, totalRows}) => {
+const PaginationTable = ({ rowsPerPage, totalRows, paginate}) => {
   const pageNumbers = [];
   for(let itr=1; itr <= Math.ceil(totalRows / rowsPerPage); itr++){
     pageNumbers.push(itr)
@@ -10,7 +10,7 @@ const PaginationTable = ({ rowsPerPage, totalRows}) => {
       <>
         <Pagination>
           {pageNumbers.map(number => (
-            <Pagination.Item key={number}>
+            <Pagination.Item key={number} onClick={() => paginate(number)}>
               {number}
             </Pagination.Item>
           ))}

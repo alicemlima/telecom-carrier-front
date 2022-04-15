@@ -8,10 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { retrieveData } from './ducks/dataSlice';
 
 function App() {
-  //Pagination State
   const [rows, setRows] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [rowsPerPage, setRowsPerPage] = React.useState(20);
+  const [rowsPerPage, setRowsPerPage] = React.useState(30);
 
   const dispatch = useDispatch();
   const {
@@ -21,7 +20,7 @@ function App() {
   } = useSelector(state => state.data);
 
   React.useEffect(() => {
-    dispatch(retrieveData())
+    dispatch(retrieveData());
     setRows(data);
   }, [dispatch]);
   
@@ -41,16 +40,19 @@ function App() {
     )
   }
 
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
+
 
   return (
     <div>
       <HeaderBar />
       <Container>
         <DataTable info={currentRows} />
-        <PaginationTable rowsPerPage={rowsPerPage} totalRows={rows.length}/>
+        <PaginationTable rowsPerPage={rowsPerPage} totalRows={rows.length} paginate={paginate}/>
       </Container>
     </div>
   );
