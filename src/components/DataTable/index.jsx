@@ -1,9 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Table } from 'react-bootstrap'
+import { useSelector } from 'react-redux';
+import { paginate } from '../../utils/paginate';
 import './styles.module.css'
 
-export default class index extends Component {
-  render() {
+const DataTable = ({ pageNumber, pageSize }) => {
+  const {
+    items: data,
+  } = useSelector(state => state.data);
+
+  const paginatedPost = paginate(data, pageNumber, pageSize)
     return (
       <Table responsive>
           <thead>
@@ -13,7 +19,7 @@ export default class index extends Component {
             <th>Monthy Setup Price</th>
           </thead>
           <tbody>
-            {(this.props.info).map(values => (
+            {(paginatedPost).map(values => (
               <tr>
                 <td>{values.id}</td>
                 <td>{values.value}</td>
@@ -24,5 +30,6 @@ export default class index extends Component {
           </tbody>
       </Table>
     )
-  }
 }
+
+export default DataTable;

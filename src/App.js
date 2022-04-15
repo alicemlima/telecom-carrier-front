@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { retrieveData } from './ducks/dataSlice';
 
 function App() {
-  const [rows, setRows] = React.useState([]);
+  // const [rows, setRows] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(30);
 
@@ -21,7 +21,6 @@ function App() {
 
   React.useEffect(() => {
     dispatch(retrieveData());
-    setRows(data);
   }, [dispatch]);
   
   if (isLoading) {
@@ -40,19 +39,38 @@ function App() {
     )
   }
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const indexOfLastRow = currentPage * rowsPerPage;
-  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
+  // const indexOfLastRow = currentPage * rowsPerPage;
+  // const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  // const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
 
+  //Pagination
+  const previousClickHandler = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const nextClickHandler = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const pageChangeHandler = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div>
       <HeaderBar />
       <Container>
-        <DataTable info={currentRows} />
-        <PaginationTable rowsPerPage={rowsPerPage} totalRows={rows.length} paginate={paginate}/>
+        <DataTable pageNumber={currentPage} pageSize={rowsPerPage} />
+        <PaginationTable 
+          currentPage={currentPage}
+          rowsPerPage={rowsPerPage}
+          noOfRows={data}
+          onPreviousClick={previousClickHandler}
+          onNextClick={nextClickHandler}
+          onPageChange={pageChangeHandler}
+        />
       </Container>
     </div>
   );
