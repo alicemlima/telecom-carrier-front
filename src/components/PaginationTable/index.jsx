@@ -17,11 +17,11 @@ const PaginationTable = ({
   }
 
   // if single page
-  if (pages === 1) return null;
+  if (pages.length === 1) return '';
 
-    return (
+  return (
       <>
-        <Pagination>
+        <Pagination className='pagination justify-content-center'>
           {currentPage !== 1 && (
             <Pagination.Prev onClick={onPreviousClick} />
           )}
