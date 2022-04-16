@@ -12,9 +12,6 @@ function App() {
   //Serch state
   const [ currentFilter, setCurrentFilter ] = React.useState('');
   const [ searchValue, setSearchValue ] = React.useState('')
-  //Pagination state
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const [rowsPerPage, setRowsPerPage] = React.useState(30);
 
   const dispatch = useDispatch();
   const {
@@ -48,18 +45,7 @@ function App() {
     setSearchValue(value)
   }
 
-  //Pagination
-  const previousClickHandler = () => {
-    setCurrentPage(currentPage - 1);
-  };
-
-  const nextClickHandler = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const pageChangeHandler = (page) => {
-    setCurrentPage(page);
-  };
+  
 
   return (
     <div>
@@ -68,15 +54,7 @@ function App() {
         <Row>
         <SearchBar value={searchValue} onChange={searchChange}/>
         </Row>
-        <DataTable pageNumber={currentPage} pageSize={rowsPerPage} searchValue={searchValue} />
-        <PaginationTable
-          currentPage={currentPage}
-          rowsPerPage={rowsPerPage}
-          noOfRows={data}
-          onPreviousClick={previousClickHandler}
-          onNextClick={nextClickHandler}
-          onPageChange={pageChangeHandler}
-        />
+        <DataTable searchValue={searchValue} />
       </Container>
     </div>
   );

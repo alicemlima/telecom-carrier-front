@@ -1,27 +1,48 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
+import PaginationTable from '../PaginationTable';
 import { paginate } from '../../utils/paginate';
 import './styles.module.css'
 
-const DataTable = ({ pageNumber, pageSize, searchValue }) => {
+const DataTable = ({ searchValue }) => {
+  //Pagination state
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [rowsPerPage, setRowsPerPage] = React.useState(30);
+  
   const {
     items: data,
   } = useSelector(state => state.data);
 
   //Search
-  let  searchResult = 0;
+  let searchResult;
+  let paginatedRow;
+  let dataRows = data;
+  paginatedRow = paginate(data, currentPage, rowsPerPage);
 
   if (searchValue) {
     searchResult = data.filter((data) =>
     data.value.includes(searchValue)
     );
+    paginatedRow = paginate(searchResult, currentPage, rowsPerPage);
+    dataRows = searchResult;
   }
 
   //Pagination
-  const paginatedRow = paginate(data, pageNumber, pageSize);
+  const previousClickHandler = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const nextClickHandler = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const pageChangeHandler = (page) => {
+    setCurrentPage(page);
+  };
   
     return (
+      <>
       <Table responsive>
           <thead>
             <tr>
@@ -32,8 +53,7 @@ const DataTable = ({ pageNumber, pageSize, searchValue }) => {
               </tr>
           </thead>
           <tbody>
-            
-            {searchValue && searchResult.map(values => (
+            {searchValue && paginatedRow.map(values => (
               <tr>
                 <td>{values.id}</td>
                 <td>{values.value}</td>
@@ -51,6 +71,16 @@ const DataTable = ({ pageNumber, pageSize, searchValue }) => {
           ))}
           </tbody>
       </Table>
+
+      <PaginationTable
+          currentPage={currentPage}
+          rowsPerPage={rowsPerPage}
+          noOfRows={dataRows}
+          onPreviousClick={previousClickHandler}
+          onNextClick={nextClickHandler}
+          onPageChange={pageChangeHandler}
+        />
+      </>
     )
 }
 

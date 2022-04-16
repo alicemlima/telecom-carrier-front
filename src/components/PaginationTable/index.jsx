@@ -9,7 +9,6 @@ const PaginationTable = ({
   onPreviousClick,
   onNextClick,
 }) => {
-console.log(noOfRows.length)
   // Counter for number of pages
   const pages = [];
   for(let itr=1; itr <= Math.ceil(noOfRows.length / rowsPerPage); itr++){
