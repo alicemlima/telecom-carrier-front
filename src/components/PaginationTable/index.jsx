@@ -1,5 +1,5 @@
 import React from 'react'
-import { Pagination } from 'react-bootstrap'
+import { Pagination } from 'react-bootstrap';
 
 const PaginationTable = ({ 
   noOfRows,
@@ -9,7 +9,7 @@ const PaginationTable = ({
   onPreviousClick,
   onNextClick,
 }) => {
-
+console.log(noOfRows.length)
   // Counter for number of pages
   const pages = [];
   for(let itr=1; itr <= Math.ceil(noOfRows.length / rowsPerPage); itr++){
@@ -32,7 +32,7 @@ const PaginationTable = ({
               <Pagination.Prev onClick={onPreviousClick} />
             )}
             {pages.map(number => (
-              <Pagination.Item key={number} onClick={() => onPageChange(number)}>
+              <Pagination.Item className={number === currentPage ? "page-item active" : "page-item"} key={number} onClick={() => onPageChange(number)}>
                 {number}
               </Pagination.Item>
             ))}
@@ -66,14 +66,16 @@ const PaginationTable = ({
             <Pagination.Prev onClick={onPreviousClick} />
           )}
           {currentPages.map(number => (
-            <Pagination.Item key={number} onClick={() => onPageChange(number)}>
+            <Pagination.Item className={number === currentPage ? "page-item active" : "page-item"} key={number} onClick={() => onPageChange(number)}>
               {number}
             </Pagination.Item>
           ))}
           {currentPage !== (pages.length) && (
             <Pagination.Next onClick={onNextClick}/>
           )}
+          <p>{currentPage}/{pages.length}</p>
         </Pagination>
+        
       </>
       );
     }

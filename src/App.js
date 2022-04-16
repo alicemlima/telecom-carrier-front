@@ -3,11 +3,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HeaderBar from './components/HeaderBar';
 import DataTable from './components/DataTable';
 import PaginationTable from './components/PaginationTable';
-import { Container, Spinner } from 'react-bootstrap';
+import SearchBar from './components/SearchBar'
+import { Container, Spinner, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { retrieveData } from './ducks/dataSlice';
 
 function App() {
+  //Serch state
+  const [ currentFilter, setCurrentFilter ] = React.useState('');
+  const [ searchValue, setSearchValue ] = React.useState('')
+  //Pagination state
   const [currentPage, setCurrentPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(30);
 
@@ -38,6 +43,11 @@ function App() {
     )
   }
 
+  //Search
+  const searchChange = (value) => {
+    setSearchValue(value)
+  }
+
   //Pagination
   const previousClickHandler = () => {
     setCurrentPage(currentPage - 1);
@@ -55,7 +65,10 @@ function App() {
     <div>
       <HeaderBar />
       <Container>
-        <DataTable pageNumber={currentPage} pageSize={rowsPerPage} />
+        <Row>
+        <SearchBar value={searchValue} onChange={searchChange}/>
+        </Row>
+        <DataTable pageNumber={currentPage} pageSize={rowsPerPage} searchValue={searchValue} />
         <PaginationTable
           currentPage={currentPage}
           rowsPerPage={rowsPerPage}
