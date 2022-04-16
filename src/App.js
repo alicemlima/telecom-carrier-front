@@ -9,7 +9,7 @@ import { retrieveData } from './ducks/dataSlice';
 
 function App() {
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(30);
 
   const dispatch = useDispatch();
   const {
