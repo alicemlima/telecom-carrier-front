@@ -8,8 +8,14 @@ import './styles.module.css'
 const DataTable = ({ searchValue }) => {
   //Pagination state
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [rowsPerPage, setRowsPerPage] = React.useState(30);
+  const [rowsPerPage] = React.useState(30);
   
+  React.useEffect(() => {
+    if(searchValue){
+      setCurrentPage(1)
+    }
+  },[searchValue])
+
   const {
     items: data,
   } = useSelector(state => state.data);
@@ -71,7 +77,6 @@ const DataTable = ({ searchValue }) => {
           ))}
           </tbody>
       </Table>
-
       <PaginationTable
           currentPage={currentPage}
           rowsPerPage={rowsPerPage}

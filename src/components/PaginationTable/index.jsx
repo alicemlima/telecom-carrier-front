@@ -38,6 +38,7 @@ const PaginationTable = ({
             {currentPage !== (pages.length) && (
               <Pagination.Next onClick={onNextClick}/>
             )}
+            <p>{currentPage}/{pages.length}</p>
           </Pagination>
         </>
       );
