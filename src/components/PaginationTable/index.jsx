@@ -9,13 +9,11 @@ const PaginationTable = ({
   onPreviousClick,
   onNextClick,
 }) => {
-  // Counter for number of pages
   const pages = [];
   for(let itr=1; itr <= Math.ceil(noOfRows.length / rowsPerPage); itr++){
     pages.push(itr)
   }
-
-  // if single page
+  
   if (pages.length === 1) return '';
 
   const renderPages = () => {

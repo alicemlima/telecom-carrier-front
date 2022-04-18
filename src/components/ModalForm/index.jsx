@@ -3,9 +3,7 @@ import { useCallback } from "react";
 import { useSelector } from 'react-redux';
 import { Modal, Button, Form, InputGroup, Col } from "react-bootstrap"
 import { phoneNumberMask, floatPriceMask } from "../../utils/mask";
-import { useCreateFormMutation } from "../../ducks/formService"
 import "./style.module.css"
-import { useDispatch } from "react-redux";
 const ModalForm = (props) => {
     const {
         items: data,
@@ -21,7 +19,7 @@ const ModalForm = (props) => {
         currency: "R$"
 
     });
-    const dispatch = useDispatch();
+
     const handleKeyUp = useCallback((e) => {
         phoneNumberMask(e)
     }, []);
@@ -29,13 +27,10 @@ const ModalForm = (props) => {
         floatPriceMask(e)
     }, []);
 
-    const [addData] = useCreateFormMutation();
     const handleSubmit = async (e) => {
       e.preventDefault();
       e.stopPropagation();
-      await dispatch(addData(formValues));
       console.log(formValues)
-    //   dispatch(addData(formValues))
     };
 
     const handleChange = e => {

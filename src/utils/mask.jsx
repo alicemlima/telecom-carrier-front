@@ -1,5 +1,4 @@
 export function phoneNumberMask(e) {
-    //Regex
     e.currentTarget.maxLength = 10;
     let value = e.currentTarget.value;
     value = value.replace(/\D/g, '');
@@ -9,7 +8,6 @@ export function phoneNumberMask(e) {
 };
 
 export function floatPriceMask(e) {
-    //Regex
     e.currentTarget.maxLength = 3;
     let value = e.currentTarget.value;
     value = value.replace(/\D/g, '');

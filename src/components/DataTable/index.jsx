@@ -1,12 +1,12 @@
 import React from 'react'
-import { Table } from 'react-bootstrap'
+import { Table, Spinner } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
+
 import PaginationTable from '../PaginationTable';
 import { paginate } from '../../utils/paginate';
 import './styles.module.css'
 
 const DataTable = ({ searchValue }) => {
-  //Pagination state
   const [currentPage, setCurrentPage] = React.useState(1);
   const [rowsPerPage] = React.useState(20);
   
@@ -17,9 +17,25 @@ const DataTable = ({ searchValue }) => {
   },[searchValue])
 
   const {
+    isLoading,
+    isError,
     items: data,
   } = useSelector(state => state.data);
 
+  if (isLoading) {
+    return (
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    )
+  }
+
+  if (isError) {
+    return (
+      <p>ERROR!</p>
+    )
+  }
+  
   //Search
   let searchResult;
   let paginatedRow;
@@ -60,16 +76,16 @@ const DataTable = ({ searchValue }) => {
           </thead>
           <tbody>
             {searchValue && paginatedRow.map(values => (
-              <tr>
+              <tr key={values.id}>
                 <td>{values.id}</td>
                 <td>{values.value}</td>
                 <td>{values.currency} {values.monthyPrice}</td>
-                <td>{values.currency} {values.monthySetupPrice}</td>
+                <td key={values.monthySetupPrice}>{values.currency} {values.monthySetupPrice}</td>
               </tr>
             ))}
             {!searchValue && (paginatedRow).map(values => (
-              <tr>
-                <td>{values.id}</td>
+              <tr key={values.id}>
+                <td >{values.id}</td>
                 <td>{values.value}</td>
                 <td>{values.currency} {values.monthyPrice}</td>
                 <td>{values.currency} {values.monthySetupPrice}</td>
