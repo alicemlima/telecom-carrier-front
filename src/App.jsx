@@ -10,7 +10,7 @@ import { retrieveData } from './ducks/dataSlice';
 
 function App() {
   const [ searchValue, setSearchValue ] = React.useState('')
-  const [modalShow, setModalShow] = React.useState(true);
+  const [modalShow, setModalShow] = React.useState(false);
 
   const dispatch = useDispatch();
   const {
