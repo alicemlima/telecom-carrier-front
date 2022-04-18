@@ -1,7 +1,9 @@
 import React from "react";
 import { useCallback } from "react";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Button, Form, InputGroup, Col } from "react-bootstrap"
+
+import { creatData } from "../../ducks/dataSlice";
 import { phoneNumberMask, floatPriceMask } from "../../utils/mask";
 import "./style.module.css"
 const ModalForm = (props) => {
@@ -17,7 +19,6 @@ const ModalForm = (props) => {
         monthyPrice: "",
         monthySetupPrice: "",
         currency: "R$"
-
     });
 
     const handleKeyUp = useCallback((e) => {
@@ -27,9 +28,12 @@ const ModalForm = (props) => {
         floatPriceMask(e)
     }, []);
 
+    const dispatch = useDispatch();
     const handleSubmit = async (e) => {
       e.preventDefault();
       e.stopPropagation();
+      dispatch(creatData(formValues))
+      
       console.log(formValues)
     };
 
