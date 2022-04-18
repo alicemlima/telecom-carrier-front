@@ -2,15 +2,15 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HeaderBar from './components/HeaderBar';
 import DataTable from './components/DataTable';
-import SearchBar from './components/SearchBar'
-import { Container, Spinner, Row } from 'react-bootstrap';
+import SearchBar from './components/SearchBar';
+import ModalForm from './components/ModalForm';
+import { Container, Spinner, Row, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { retrieveData } from './ducks/dataSlice';
 
 function App() {
-  //Serch state
-  // const [ currentFilter, setCurrentFilter ] = React.useState('');
   const [ searchValue, setSearchValue ] = React.useState('')
+  const [modalShow, setModalShow] = React.useState(true);
 
   const dispatch = useDispatch();
   const {
@@ -43,19 +43,28 @@ function App() {
     setSearchValue(value)
   }
 
-  
-
   return (
     <div>
       <HeaderBar />
       <Container>
         <Row>
-        <SearchBar value={searchValue} onChange={searchChange}/>
+          <SearchBar value={searchValue} onChange={searchChange}/>
+          <Button
+            variant="dark"
+            className="my-2 mx-3 w-auto"
+            onClick={() => setModalShow(true)}
+          >
+          Register
+          </Button>
+          <ModalForm
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
         </Row>
         <DataTable searchValue={searchValue} />
       </Container>
     </div>
-  );
+  )
 }
 
 export default App;

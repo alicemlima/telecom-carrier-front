@@ -1,13 +1,14 @@
 import React from "react";
-import { Col } from "react-bootstrap";
+import { Col, FormControl } from "react-bootstrap";
 
 const SearchBar = ({ value, onChange }) => {
     return (
         <Col>
-            <input 
+            <FormControl 
                 type='search'
+                className="my-2 w-auto"
                 value={value}
-                placeholder={value}
+                placeholder="Type to search..."
                 onChange={(e) => onChange(e.target.value)}
             />
         </Col>

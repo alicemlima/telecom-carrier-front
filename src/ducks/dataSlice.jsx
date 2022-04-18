@@ -28,7 +28,7 @@ const { setDataSuccess, setDataLoading, setDataError } = dataSlice.actions;
 
 export const retrieveData = () => (dispatch) => {
     dispatch(setDataLoading());
-    fetch('http://localhost:3000/data')
+    fetch('http://localhost:3001/data')
     .then(response => response.json())
     .then(payload => {
       const retrievedData = Object.values(payload);

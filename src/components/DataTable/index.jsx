@@ -8,7 +8,7 @@ import './styles.module.css'
 const DataTable = ({ searchValue }) => {
   //Pagination state
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [rowsPerPage] = React.useState(30);
+  const [rowsPerPage] = React.useState(20);
   
   React.useEffect(() => {
     if(searchValue){
